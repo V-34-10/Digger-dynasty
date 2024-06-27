@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Digging Dynasty Slots</string>
+    <string name="welcome_text">Welcome</string>
+    <string name="button_play">button play</string>
 </resources>
