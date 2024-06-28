@@ -42,13 +42,10 @@
                 android:id="@+id/btn_lucky_theme"
                 android:layout_width="140dp"
                 android:layout_height="200dp"
-                android:layout_marginStart="30dp"
                 android:background="@drawable/theme_lucky"
                 android:clickable="true"
                 android:contentDescription="@string/theme_lucky"
-                android:focusable="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_slot_games" />
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/btn_theme_old_jack"
@@ -58,9 +55,7 @@
                 android:background="@drawable/theme_old_jack"
                 android:clickable="true"
                 android:contentDescription="@string/theme_old_jack"
-                android:focusable="true"
-                app:layout_constraintStart_toEndOf="@+id/btn_game_three"
-                app:layout_constraintTop_toBottomOf="@+id/text_slot_games" />
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/btn_game_block_first"
@@ -70,9 +65,7 @@
                 android:background="@drawable/theme_maria"
                 android:clickable="true"
                 android:contentDescription="@string/theme_maria"
-                android:focusable="true"
-                app:layout_constraintStart_toEndOf="@+id/btn_game_three"
-                app:layout_constraintTop_toBottomOf="@+id/text_slot_games" />
+                android:focusable="true" />
 
         </LinearLayout>
 
