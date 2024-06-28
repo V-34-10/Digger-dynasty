@@ -1,20 +1,25 @@
 <resources>
     <string name="app_name">Digging Dynasty Slots</string>
+
     <string name="welcome_text">Welcome</string>
     <string name="button_play">button play</string>
     <string name="button_accept">button accept</string>
+
     <string name="privacy_text">Privacy policy</string>
     <string name="button_back">button_back</string>
+
     <string name="text_theme">Choose your theme</string>
     <string name="button_continue">button continue</string>
     <string name="theme_lucky">theme lucky</string>
     <string name="theme_old_jack">theme old jack</string>
     <string name="theme_maria">theme maria</string>
+
     <string name="text_level">Choose your level</string>
     <string name="level_easy">level easy</string>
     <string name="level_medium">level medium</string>
     <string name="level_hard">level hard</string>
     <string name="text_score">High score</string>
+
     <string name="text_settings">Settings</string>
     <string name="button_off">button off sound</string>
     <string name="button_on">button on sound</string>
@@ -25,4 +30,13 @@
     <string name="text_selected_level">Easy</string>
     <string name="title_theme">Theme</string>
     <string name="text_selected_theme">Lucky Lucy</string>
+
+    <string name="title_matchmaking_lucky_game">Game Lucky Lucy</string>
+    <string name="title_matchmaking_jack_game">Game Old-Timer Jack</string>
+    <string name="title_matchmaking_maria_game">Game Mystic Maria</string>
+
+    <string name="text_wins">Wins</string>
+    <string name="text_result_wins">11</string>
+    <string name="button_high_score">button high score</string>
+    <string name="button_start">button start</string>
 </resources>
