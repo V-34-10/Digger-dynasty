@@ -1,4 +1,4 @@
-package com.diggingdy.nastyslo.ui.menu
+package com.diggingdy.nastyslo.ui.splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
