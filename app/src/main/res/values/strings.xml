@@ -10,4 +10,8 @@
     <string name="theme_lucky">theme lucky</string>
     <string name="theme_old_jack">theme old jack</string>
     <string name="theme_maria">theme maria</string>
+    <string name="text_level">Choose your level</string>
+    <string name="level_easy">level easy</string>
+    <string name="level_medium">level medium</string>
+    <string name="level_hard">level hard</string>
 </resources>
