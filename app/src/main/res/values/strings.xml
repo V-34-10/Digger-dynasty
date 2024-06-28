@@ -14,4 +14,5 @@
     <string name="level_easy">level easy</string>
     <string name="level_medium">level medium</string>
     <string name="level_hard">level hard</string>
+    <string name="text_score">High score</string>
 </resources>
