@@ -5,4 +5,9 @@
     <string name="button_accept">button accept</string>
     <string name="privacy_text">Privacy policy</string>
     <string name="button_back">button_back</string>
+    <string name="text_theme">Choose your theme</string>
+    <string name="button_continue">button continue</string>
+    <string name="theme_lucky">theme lucky</string>
+    <string name="theme_old_jack">theme old jack</string>
+    <string name="theme_maria">theme maria</string>
 </resources>

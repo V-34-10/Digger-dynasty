@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_main"
+    tools:context=".ui.menu.MenuActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/privacy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/arvo_bold"
+            android:text="@string/text_theme"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp45"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/btn_accept"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_theme">
+
+            <ImageView
+                android:id="@+id/btn_lucky_theme"
+                android:layout_width="140dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/theme_lucky"
+                android:clickable="true"
+                android:contentDescription="@string/theme_lucky"
+                android:focusable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_slot_games" />
+
+            <ImageView
+                android:id="@+id/btn_theme_old_jack"
+                android:layout_width="140dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="25dp"
+                android:background="@drawable/theme_old_jack"
+                android:clickable="true"
+                android:contentDescription="@string/theme_old_jack"
+                android:focusable="true"
+                app:layout_constraintStart_toEndOf="@+id/btn_game_three"
+                app:layout_constraintTop_toBottomOf="@+id/text_slot_games" />
+
+            <ImageView
+                android:id="@+id/btn_game_block_first"
+                android:layout_width="140dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="25dp"
+                android:background="@drawable/theme_maria"
+                android:clickable="true"
+                android:contentDescription="@string/theme_maria"
+                android:focusable="true"
+                app:layout_constraintStart_toEndOf="@+id/btn_game_three"
+                app:layout_constraintTop_toBottomOf="@+id/text_slot_games" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btn_accept"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/button_continue"
+            android:clickable="true"
+            android:contentDescription="@string/button_continue"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_black"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button_back"
+            android:clickable="true"
+            android:contentDescription="@string/button_back"
+            android:focusable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

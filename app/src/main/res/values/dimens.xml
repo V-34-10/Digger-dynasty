@@ -3,4 +3,6 @@
     <dimen name="dp50">50dp</dimen>
     <dimen name="sp65">65sp</dimen>
     <dimen name="sp85">85sp</dimen>
+    <dimen name="sp55">55sp</dimen>
+    <dimen name="sp45">45sp</dimen>
 </resources>
