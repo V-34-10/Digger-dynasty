@@ -5,4 +5,6 @@
     <dimen name="sp85">85sp</dimen>
     <dimen name="sp55">55sp</dimen>
     <dimen name="sp45">45sp</dimen>
+    <dimen name="sp18">18sp</dimen>
+    <dimen name="sp15">15sp</dimen>
 </resources>
