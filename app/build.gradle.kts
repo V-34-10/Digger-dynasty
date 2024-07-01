@@ -1,12 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-android-extensions")
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.diggingdy.nastyslo"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.diggingdy.nastyslo"
