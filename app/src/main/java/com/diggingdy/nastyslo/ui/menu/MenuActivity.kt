@@ -28,19 +28,19 @@ class MenuActivity : AppCompatActivity() {
         binding.btnLuckyTheme.setOnClickListener {
             it.startAnimation(animation)
             binding.btnLuckyTheme.setImageResource(R.drawable.theme_lucky_selected)
-            sharedPref.edit().putString("themeGame", "LuckyTheme").apply()
+            sharedPref.edit().putString("themeGame", "Lucky Lucy").apply()
         }
         binding.btnThemeOldJack.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             it.startAnimation(animation)
             binding.btnLuckyTheme.setImageResource(R.drawable.theme_old_jack_selected)
-            sharedPref.edit().putString("themeGame", "ThemeOldJack").apply()
+            sharedPref.edit().putString("themeGame", "Old-Timer Jack").apply()
         }
         binding.btnThemeMaria.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             it.startAnimation(animation)
             binding.btnLuckyTheme.setImageResource(R.drawable.theme_maria_selected)
-            sharedPref.edit().putString("themeGame", "ThemeMaria").apply()
+            sharedPref.edit().putString("themeGame", "Mystic Maria").apply()
         }
         binding.btnContinue.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
