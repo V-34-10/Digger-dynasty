@@ -22,6 +22,7 @@ class ScoreActivity : AppCompatActivity() {
 
     private fun confirmGameSettingsButton() {
         var animation = AnimationUtils.loadAnimation(this, R.anim.scale)
+        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         binding.btnOk.setOnClickListener {
             it.startAnimation(animation)
             startActivity(Intent(this@ScoreActivity, SettingsActivity::class.java))
