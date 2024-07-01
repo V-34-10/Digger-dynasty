@@ -9,6 +9,7 @@ import com.diggingdy.nastyslo.HideNavigation
 import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.ActivityScoreBinding
 import com.diggingdy.nastyslo.ui.settings.SettingsActivity
+import com.diggingdy.nastyslo.ui.settings.VibrateManager
 
 class ScoreActivity : AppCompatActivity() {
     private val binding by lazy { ActivityScoreBinding.inflate(layoutInflater) }
@@ -25,15 +26,24 @@ class ScoreActivity : AppCompatActivity() {
         sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         binding.btnOk.setOnClickListener {
             it.startAnimation(animation)
+            vibrationMode()
             startActivity(Intent(this@ScoreActivity, SettingsActivity::class.java))
             finish()
         }
         binding.btnBack.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             it.startAnimation(animation)
+            vibrationMode()
             sharedPref.edit().putString("levelGame", "").apply()
             startActivity(Intent(this@ScoreActivity, LevelActivity::class.java))
             finish()
+        }
+    }
+
+    private fun vibrationMode() {
+        val isVibration = sharedPref.getBoolean("vibration_enabled", false)
+        if (isVibration) {
+            VibrateManager.vibrateDevice(this, 200)
         }
     }
 }

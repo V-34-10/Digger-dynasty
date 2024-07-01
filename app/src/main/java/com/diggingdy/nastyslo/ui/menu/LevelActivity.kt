@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.diggingdy.nastyslo.HideNavigation
 import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.ActivityLevelBinding
+import com.diggingdy.nastyslo.ui.settings.VibrateManager
 
 class LevelActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLevelBinding.inflate(layoutInflater) }
@@ -26,23 +27,27 @@ class LevelActivity : AppCompatActivity() {
 
         binding.btnEasyLevel.setOnClickListener {
             it.startAnimation(animation)
+            vibrationMode()
             binding.btnEasyLevel.setImageResource(R.drawable.theme_lucky_selected)
             sharedPref.edit().putString("levelGame", "Easy").apply()
         }
         binding.btnMediumLevel.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             it.startAnimation(animation)
+            vibrationMode()
             binding.btnMediumLevel.setImageResource(R.drawable.theme_old_jack_selected)
             sharedPref.edit().putString("levelGame", "Medium").apply()
         }
         binding.btnHardLevel.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             it.startAnimation(animation)
+            vibrationMode()
             binding.btnHardLevel.setImageResource(R.drawable.theme_maria_selected)
             sharedPref.edit().putString("levelGame", "Hard").apply()
         }
         binding.btnContinue.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
+            vibrationMode()
             val setLevel = sharedPref.getString("levelGame", "")
             if (setLevel.equals("")) {
                 Toast.makeText(this, R.string.error_choice_level, Toast.LENGTH_SHORT).show()
@@ -55,9 +60,17 @@ class LevelActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             it.startAnimation(animation)
+            vibrationMode()
             sharedPref.edit().putString("themeGame", "").apply()
             startActivity(Intent(this@LevelActivity, MenuActivity::class.java))
             finish()
+        }
+    }
+
+    private fun vibrationMode() {
+        val isVibration = sharedPref.getBoolean("vibration_enabled", false)
+        if (isVibration) {
+            VibrateManager.vibrateDevice(this, 200)
         }
     }
 }

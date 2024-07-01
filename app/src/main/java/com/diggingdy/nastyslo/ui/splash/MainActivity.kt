@@ -10,6 +10,7 @@ import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.ActivityMainBinding
 import com.diggingdy.nastyslo.ui.menu.MenuActivity
 import com.diggingdy.nastyslo.ui.privacy.PrivacyActivity
+import com.diggingdy.nastyslo.ui.settings.VibrateManager
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnPlay.setOnClickListener {
             it.startAnimation(animation)
+            vibrationMode()
             binding.btnPlay.isEnabled = false
             val startIntent = if (!flagPrivacy) {
                 Intent(this@MainActivity, PrivacyActivity::class.java)
@@ -41,6 +43,13 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(startIntent)
             finish()
+        }
+    }
+
+    private fun vibrationMode() {
+        val isVibration = sharedPref.getBoolean("vibration_enabled", false)
+        if (isVibration) {
+            VibrateManager.vibrateDevice(this, 200)
         }
     }
 
