@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnPlay.setOnClickListener {
             it.startAnimation(animation)
+            binding.btnPlay.isEnabled = false
             val startIntent = if (!flagPrivacy) {
                 Intent(this@MainActivity, PrivacyActivity::class.java)
             } else {
