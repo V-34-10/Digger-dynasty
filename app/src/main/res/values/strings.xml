@@ -39,5 +39,7 @@
     <string name="text_result_wins">11</string>
     <string name="button_high_score">button high score</string>
     <string name="button_start">button start</string>
+
     <string name="error_choice_theme">Please choose a game theme!</string>
+    <string name="error_choice_level">Please choose a game level!</string>
 </resources>
