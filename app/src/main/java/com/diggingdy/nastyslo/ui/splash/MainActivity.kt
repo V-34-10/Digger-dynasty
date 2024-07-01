@@ -3,25 +3,26 @@ package com.diggingdy.nastyslo.ui.splash
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.diggingdy.nastyslo.HideNavigation
 import com.diggingdy.nastyslo.R
+import com.diggingdy.nastyslo.databinding.ActivityMainBinding
 import com.diggingdy.nastyslo.ui.menu.MenuActivity
 import com.diggingdy.nastyslo.ui.privacy.PrivacyActivity
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var sharedPref: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
         HideNavigation.hideNavigation(this)
         startPrivacy()
     }
 
     private fun startPrivacy() {
+        val animation = AnimationUtils.loadAnimation(this, R.anim.scale)
         sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         val flagPrivacy = sharedPref.getBoolean("statusPrivacy", false)
 
@@ -29,9 +30,8 @@ class MainActivity : AppCompatActivity() {
             sharedPref.edit().putBoolean("statusPrivacy", true).apply()
         }
 
-        lifecycleScope.launch {
-            delay(3000L)
-
+        binding.btnPlay.setOnClickListener {
+            it.startAnimation(animation)
             val startIntent = if (!flagPrivacy) {
                 Intent(this@MainActivity, PrivacyActivity::class.java)
             } else {
