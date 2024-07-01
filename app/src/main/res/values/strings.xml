@@ -43,4 +43,8 @@
     <string name="error_choice_theme">Please choose a game theme!</string>
     <string name="error_choice_level">Please choose a game level!</string>
     <string name="read_text"><u>Read</u></string>
+
+    <string name="name_lucky">Lucky Lucy</string>
+    <string name="name_old_jack">Old-Timer Jack</string>
+    <string name="name_maria">Mystic Maria</string>
 </resources>
