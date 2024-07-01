@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/button_on"
+                    android:id="@+id/button_on_sounds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_on"
@@ -67,11 +67,11 @@
                     android:contentDescription="@string/button_on"
                     android:focusable="true"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/button_off"
+                    app:layout_constraintEnd_toStartOf="@+id/button_off_sounds"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/button_off"
+                    android:id="@+id/button_off_sounds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
@@ -109,7 +109,7 @@
                     android:id="@+id/button_on_vibration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_on_color"
+                    android:background="@drawable/button_on"
                     android:clickable="true"
                     android:contentDescription="@string/button_on"
                     android:focusable="true"
@@ -122,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:background="@drawable/button_off"
+                    android:background="@drawable/button_off_color"
                     android:clickable="true"
                     android:contentDescription="@string/button_off"
                     android:focusable="true"
