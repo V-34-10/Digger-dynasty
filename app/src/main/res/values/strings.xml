@@ -47,4 +47,5 @@
     <string name="name_lucky">Lucky Lucy</string>
     <string name="name_old_jack">Old-Timer Jack</string>
     <string name="name_maria">Mystic Maria</string>
+    <string name="card_image">card image</string>
 </resources>
