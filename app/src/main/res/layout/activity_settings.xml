@@ -40,7 +40,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text_settings">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:background="@drawable/background_text"
                 android:orientation="horizontal">
@@ -86,7 +86,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/background_text"
@@ -133,7 +133,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/background_text"
@@ -182,7 +182,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/background_text"
