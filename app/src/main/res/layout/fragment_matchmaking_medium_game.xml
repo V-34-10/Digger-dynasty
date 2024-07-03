@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_scene_old_jack"
-    tools:context=".ui.scene.games.medium.MatchmakingMediumGameFragment">
+    tools:context=".ui.scene.games.MatchmakingMediumGameFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/status_wins"
         android:layout_width="130dp"
-        android:layout_height="140dp"
+        android:layout_height="130dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/background_text_game_second"
@@ -78,6 +78,7 @@
             android:layout_height="140dp"
             android:background="@drawable/background_text_game_second"
             android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/btn_high_score"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -114,11 +115,11 @@
                 android:id="@+id/btn_change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:background="@drawable/button_change_second"
                 android:clickable="true"
                 android:contentDescription="@string/button_change"
                 android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_selected_level" />
@@ -127,26 +128,26 @@
 
         <ImageView
             android:id="@+id/btn_high_score"
-            android:layout_width="130dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="110dp"
+            android:layout_height="80dp"
             android:background="@drawable/button_high_score_second"
             android:clickable="true"
             android:contentDescription="@string/button_high_score"
             android:focusable="true"
+            app:layout_constraintBottom_toTopOf="@+id/btn_start"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/change_bar_level" />
 
         <ImageView
             android:id="@+id/btn_start"
-            android:layout_width="130dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="110dp"
+            android:layout_height="80dp"
             android:background="@drawable/button_start_second"
             android:clickable="true"
             android:contentDescription="@string/button_start"
             android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_high_score" />
