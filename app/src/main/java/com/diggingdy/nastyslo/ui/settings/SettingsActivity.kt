@@ -32,6 +32,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun setSelectedThemeAndLevel() {
+        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         val setTheme = sharedPref.getString("themeGame", "")
         binding.textSelectedTheme.text = setTheme
         val setLevel = sharedPref.getString("levelGame", "")
@@ -116,6 +117,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun vibrationMode() {
+        val isVibration = sharedPref.getBoolean("vibration_enabled", false)
         if (isVibration) {
             vibrateDevice(this, 200)
         }
