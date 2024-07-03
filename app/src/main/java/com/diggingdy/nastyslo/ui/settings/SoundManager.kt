@@ -1,58 +1,57 @@
 package com.diggingdy.nastyslo.ui.settings
 
 import android.content.Context
-import android.media.AudioAttributes
 import android.media.MediaPlayer
-import android.media.SoundPool
 import androidx.annotation.RawRes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class SoundManager(private val context: Context) {
+    private val mediaPlayers = mutableMapOf<Int, MediaPlayer>()
+    private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
-    private var soundPool: SoundPool
-    private val soundIdMap = mutableMapOf<String, Int>()
+    fun playSound(@RawRes soundResId: Int, loop: Boolean = false) {
+        if (mediaPlayers.containsKey(soundResId) && mediaPlayers[soundResId]?.isPlaying == true) {
+            return
+        }
 
-    init {
-        val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_GAME)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build()
-        soundPool = SoundPool.Builder()
-            .setMaxStreams(10)
-            .setAudioAttributes(audioAttributes)
-            .build()
+        val mediaPlayer = MediaPlayer.create(context, soundResId).apply {
+            isLooping = loop
+            setOnCompletionListener {
+                if (!loop) {
+                    scope.launch {
+                        releaseMediaPlayer(soundResId)
+                    }
+                }
+            }
+        }
+
+        mediaPlayers[soundResId] = mediaPlayer
+        mediaPlayer.start()
     }
 
-    fun loadSound(soundName: String, @RawRes resId: Int) {
-        val soundId = soundPool.load(context, resId, 1)
-        soundIdMap[soundName] = soundId
-    }
-
-    fun playSound(soundName: String, loop: Boolean = false) {
-        val soundId = soundIdMap[soundName] ?: return
-
-        if (loop) {
-            val mediaPlayer = MediaPlayer.create(context, soundId)
-            mediaPlayer.isLooping = true
-            mediaPlayer.start()
-        } else {
-            soundPool.play(soundId, 1f, 1f, 1, 0, 1f)
+    fun stopSound(@RawRes soundResId: Int) {
+        scope.launch {
+            releaseMediaPlayer(soundResId)
         }
     }
 
-    fun pause() {
-        soundPool.autoPause()
-    }
-
-    fun resume() {
-        soundPool.autoResume()
-    }
-
-    fun stopSound(soundName: String) {
-        val soundId = soundIdMap[soundName] ?: return
-        soundPool.stop(soundId)
-    }
-
     fun release() {
-        soundPool.release()
+        scope.cancel()
+        mediaPlayers.values.forEach { it.release() }
+        mediaPlayers.clear()
+    }
+
+    private fun releaseMediaPlayer(soundResId: Int) {
+        mediaPlayers[soundResId]?.let {
+            if (it.isPlaying) {
+                it.stop()
+            }
+            it.release()
+            mediaPlayers.remove(soundResId)
+        }
     }
 }
