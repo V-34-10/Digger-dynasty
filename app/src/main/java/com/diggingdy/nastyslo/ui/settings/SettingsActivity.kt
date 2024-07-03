@@ -22,13 +22,33 @@ class SettingsActivity : AppCompatActivity() {
     private val managerAudio by lazy { getSystemService(Context.AUDIO_SERVICE) as AudioManager }
     private var defaultVolume: Int = 0
     private var isVibration: Boolean = false
+    private var isSound: Boolean = false
     private lateinit var sharedPref: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
         setSelectedThemeAndLevel()
+        setButtonBackgroundSoundAndVibration()
         changeSettingsButton()
+    }
+
+    private fun setButtonBackgroundSoundAndVibration() {
+        if (sharedPref.getBoolean("vibration_enabled", false)) {
+            binding.buttonOnVibration.setBackgroundResource(R.drawable.button_on_color)
+            binding.buttonOffVibration.setBackgroundResource(R.drawable.button_off)
+        } else {
+            binding.buttonOffVibration.setBackgroundResource(R.drawable.button_off_color)
+            binding.buttonOnVibration.setBackgroundResource(R.drawable.button_on)
+        }
+
+        if (sharedPref.getBoolean("sound_enabled", false)) {
+            binding.buttonOnSounds.setBackgroundResource(R.drawable.button_on_color)
+            binding.buttonOffSounds.setBackgroundResource(R.drawable.button_off)
+        } else {
+            binding.buttonOffSounds.setBackgroundResource(R.drawable.button_off_color)
+            binding.buttonOnSounds.setBackgroundResource(R.drawable.button_on)
+        }
     }
 
     private fun setSelectedThemeAndLevel() {
@@ -41,29 +61,34 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun changeSettingsButton() {
         var animation = AnimationUtils.loadAnimation(this, R.anim.scale)
+
         sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         isVibration = sharedPref.getBoolean("vibration_enabled", false)
+        isSound = sharedPref.getBoolean("sound_enabled", false)
+
         binding.buttonOnSounds.setOnClickListener {
             it.startAnimation(animation)
             setOnSound()
-            binding.buttonOnSounds.setImageResource(R.drawable.button_on_color)
-            binding.buttonOffSounds.setImageResource(R.drawable.button_off)
+            sharedPref.edit().putBoolean("sound_enabled", true).apply()
+            binding.buttonOnSounds.setBackgroundResource(R.drawable.button_on_color)
+            binding.buttonOffSounds.setBackgroundResource(R.drawable.button_off)
             vibrationMode()
         }
         binding.buttonOffSounds.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             it.startAnimation(animation)
             setOffSound()
-            binding.buttonOffSounds.setImageResource(R.drawable.button_off_color)
-            binding.buttonOnSounds.setImageResource(R.drawable.button_on)
+            sharedPref.edit().putBoolean("sound_enabled", false).apply()
+            binding.buttonOffSounds.setBackgroundResource(R.drawable.button_off_color)
+            binding.buttonOnSounds.setBackgroundResource(R.drawable.button_on)
             vibrationMode()
         }
         binding.buttonOnVibration.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             it.startAnimation(animation)
             sharedPref.edit().putBoolean("vibration_enabled", true).apply()
-            binding.buttonOnVibration.setImageResource(R.drawable.button_on_color)
-            binding.buttonOffVibration.setImageResource(R.drawable.button_off)
+            binding.buttonOnVibration.setBackgroundResource(R.drawable.button_on_color)
+            binding.buttonOffVibration.setBackgroundResource(R.drawable.button_off)
             vibrationMode()
         }
         binding.buttonOffVibration.setOnClickListener {
@@ -71,8 +96,8 @@ class SettingsActivity : AppCompatActivity() {
             it.startAnimation(animation)
             cancelVibration(this)
             sharedPref.edit().putBoolean("vibration_enabled", false).apply()
-            binding.buttonOffVibration.setImageResource(R.drawable.button_off_color)
-            binding.buttonOnVibration.setImageResource(R.drawable.button_on)
+            binding.buttonOffVibration.setBackgroundResource(R.drawable.button_off_color)
+            binding.buttonOnVibration.setBackgroundResource(R.drawable.button_on)
             vibrationMode()
         }
         binding.buttonChangeTheme.setOnClickListener {
