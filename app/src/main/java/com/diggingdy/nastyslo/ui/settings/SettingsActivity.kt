@@ -55,7 +55,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun setSelectedThemeAndLevel() {
-        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         val setTheme = sharedPref.getString("themeGame", "")
         binding.textSelectedTheme.text = setTheme
         val setLevel = sharedPref.getString("levelGame", "")
