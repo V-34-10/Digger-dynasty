@@ -23,27 +23,33 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun choiceThemeGameButton() {
-        var animation = AnimationUtils.loadAnimation(this, R.anim.scale)
+        var animation = AnimationUtils.loadAnimation(this, R.anim.scale_btn)
         sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
 
         binding.btnLuckyTheme.setOnClickListener {
             it.startAnimation(animation)
             vibrationMode()
-            binding.btnLuckyTheme.setImageResource(R.drawable.theme_lucky_selected)
+            binding.btnLuckyTheme.setBackgroundResource(R.drawable.theme_lucky_selected)
+            binding.btnThemeOldJack.setBackgroundResource(R.drawable.theme_old_jack)
+            binding.btnThemeMaria.setBackgroundResource(R.drawable.theme_maria)
             sharedPref.edit().putString("themeGame", "Lucky Lucy").apply()
         }
         binding.btnThemeOldJack.setOnClickListener {
-            animation = AnimationUtils.loadAnimation(this, R.anim.scale)
+            animation = AnimationUtils.loadAnimation(this, R.anim.scale_btn)
             vibrationMode()
             it.startAnimation(animation)
-            binding.btnLuckyTheme.setImageResource(R.drawable.theme_old_jack_selected)
+            binding.btnThemeOldJack.setBackgroundResource(R.drawable.theme_old_jack_selected)
+            binding.btnLuckyTheme.setBackgroundResource(R.drawable.theme_lucky)
+            binding.btnThemeMaria.setBackgroundResource(R.drawable.theme_maria)
             sharedPref.edit().putString("themeGame", "Old-Timer Jack").apply()
         }
         binding.btnThemeMaria.setOnClickListener {
-            animation = AnimationUtils.loadAnimation(this, R.anim.scale)
+            animation = AnimationUtils.loadAnimation(this, R.anim.scale_btn)
             vibrationMode()
             it.startAnimation(animation)
-            binding.btnLuckyTheme.setImageResource(R.drawable.theme_maria_selected)
+            binding.btnThemeMaria.setBackgroundResource(R.drawable.theme_maria_selected)
+            binding.btnLuckyTheme.setBackgroundResource(R.drawable.theme_lucky)
+            binding.btnThemeOldJack.setBackgroundResource(R.drawable.theme_old_jack)
             sharedPref.edit().putString("themeGame", "Mystic Maria").apply()
         }
         binding.btnContinue.setOnClickListener {
