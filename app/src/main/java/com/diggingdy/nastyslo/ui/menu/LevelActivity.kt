@@ -22,27 +22,33 @@ class LevelActivity : AppCompatActivity() {
     }
 
     private fun choiceLevelGameButton() {
-        var animation = AnimationUtils.loadAnimation(this, R.anim.scale)
+        var animation = AnimationUtils.loadAnimation(this, R.anim.scale_btn)
         sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
 
         binding.btnEasyLevel.setOnClickListener {
             it.startAnimation(animation)
             vibrationMode()
-            binding.btnEasyLevel.setImageResource(R.drawable.theme_lucky_selected)
+            binding.btnEasyLevel.setBackgroundResource(R.drawable.level_easy_selected)
+            binding.btnMediumLevel.setBackgroundResource(R.drawable.level_medium)
+            binding.btnHardLevel.setBackgroundResource(R.drawable.level_hard)
             sharedPref.edit().putString("levelGame", "Easy").apply()
         }
         binding.btnMediumLevel.setOnClickListener {
-            animation = AnimationUtils.loadAnimation(this, R.anim.scale)
+            animation = AnimationUtils.loadAnimation(this, R.anim.scale_btn)
             it.startAnimation(animation)
             vibrationMode()
-            binding.btnMediumLevel.setImageResource(R.drawable.theme_old_jack_selected)
+            binding.btnMediumLevel.setBackgroundResource(R.drawable.level_medium_selected)
+            binding.btnEasyLevel.setBackgroundResource(R.drawable.level_easy)
+            binding.btnHardLevel.setBackgroundResource(R.drawable.level_hard)
             sharedPref.edit().putString("levelGame", "Medium").apply()
         }
         binding.btnHardLevel.setOnClickListener {
-            animation = AnimationUtils.loadAnimation(this, R.anim.scale)
+            animation = AnimationUtils.loadAnimation(this, R.anim.scale_btn)
             it.startAnimation(animation)
             vibrationMode()
-            binding.btnHardLevel.setImageResource(R.drawable.theme_maria_selected)
+            binding.btnHardLevel.setBackgroundResource(R.drawable.level_hard_selected)
+            binding.btnEasyLevel.setBackgroundResource(R.drawable.level_easy)
+            binding.btnMediumLevel.setBackgroundResource(R.drawable.level_medium)
             sharedPref.edit().putString("levelGame", "Hard").apply()
         }
         binding.btnContinue.setOnClickListener {
