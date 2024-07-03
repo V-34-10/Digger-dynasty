@@ -25,6 +25,7 @@ class SceneActivity : AppCompatActivity() {
     }
 
     private fun setGameFragment() {
+        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         val fragmentGame: Fragment = when (sharedPref.getString("themeGame", "") ?: "") {
             getString(R.string.name_lucky) -> {
                 MatchmakingEasyGameFragment()
