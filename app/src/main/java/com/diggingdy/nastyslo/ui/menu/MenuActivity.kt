@@ -9,16 +9,20 @@ import androidx.appcompat.app.AppCompatActivity
 import com.diggingdy.nastyslo.HideNavigation
 import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.ActivityMenuBinding
+import com.diggingdy.nastyslo.ui.settings.SoundManager
 import com.diggingdy.nastyslo.ui.settings.VibrateManager
 import com.diggingdy.nastyslo.ui.splash.MainActivity
 
 class MenuActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMenuBinding.inflate(layoutInflater) }
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var soundManager: SoundManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
+        soundManager = SoundManager(this)
+        soundMode()
         choiceThemeGameButton()
     }
 
@@ -78,5 +82,24 @@ class MenuActivity : AppCompatActivity() {
         if (isVibration) {
             VibrateManager.vibrateDevice(this, 200)
         }
+    }
+
+    private fun soundMode() {
+        val isSound = sharedPref.getBoolean("sound_enabled", false)
+        if (isSound) {
+            soundManager.apply {
+                loadSound("backgroundMenu", R.raw.sound_background_menu)
+                playSound("backgroundMenu", true)
+            }
+        } else {
+            soundManager.apply {
+                stopSound("backgroundMenu")
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release()
     }
 }

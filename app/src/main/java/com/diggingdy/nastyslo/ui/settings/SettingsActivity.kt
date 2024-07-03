@@ -24,10 +24,13 @@ class SettingsActivity : AppCompatActivity() {
     private var isVibration: Boolean = false
     private var isSound: Boolean = false
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var soundManager: SoundManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
+        soundManager = SoundManager(this)
+
         setSelectedThemeAndLevel()
         setButtonBackgroundSoundAndVibration()
         changeSettingsButton()
@@ -73,6 +76,7 @@ class SettingsActivity : AppCompatActivity() {
             binding.buttonOnSounds.setBackgroundResource(R.drawable.button_on_color)
             binding.buttonOffSounds.setBackgroundResource(R.drawable.button_off)
             vibrationMode()
+            soundMode()
         }
         binding.buttonOffSounds.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
@@ -82,6 +86,7 @@ class SettingsActivity : AppCompatActivity() {
             binding.buttonOffSounds.setBackgroundResource(R.drawable.button_off_color)
             binding.buttonOnSounds.setBackgroundResource(R.drawable.button_on)
             vibrationMode()
+            soundMode()
         }
         binding.buttonOnVibration.setOnClickListener {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
@@ -146,5 +151,24 @@ class SettingsActivity : AppCompatActivity() {
         if (isVibration) {
             vibrateDevice(this, 200)
         }
+    }
+
+    private fun soundMode() {
+        isSound = sharedPref.getBoolean("sound_enabled", false)
+        if (isSound) {
+            soundManager.apply {
+                loadSound("backgroundMenu", R.raw.sound_background_menu)
+                playSound("backgroundMenu", true)
+            }
+        } else {
+            soundManager.apply {
+                stopSound("backgroundMenu")
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release()
     }
 }

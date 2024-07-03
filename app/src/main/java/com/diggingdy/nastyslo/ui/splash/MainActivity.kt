@@ -10,15 +10,19 @@ import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.ActivityMainBinding
 import com.diggingdy.nastyslo.ui.menu.MenuActivity
 import com.diggingdy.nastyslo.ui.privacy.PrivacyActivity
+import com.diggingdy.nastyslo.ui.settings.SoundManager
 import com.diggingdy.nastyslo.ui.settings.VibrateManager
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var soundManager: SoundManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
+        soundManager = SoundManager(this)
+        soundMode()
         startPrivacy()
     }
 
@@ -57,5 +61,24 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    private fun soundMode() {
+        val isSound = sharedPref.getBoolean("sound_enabled", false)
+        if (isSound) {
+            soundManager.apply {
+                loadSound("backgroundMenu", R.raw.sound_background_menu)
+                playSound("backgroundMenu", true)
+            }
+        } else {
+            soundManager.apply {
+                stopSound("backgroundMenu")
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release()
     }
 }
