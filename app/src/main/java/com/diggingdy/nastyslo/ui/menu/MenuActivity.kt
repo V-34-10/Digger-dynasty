@@ -22,13 +22,14 @@ class MenuActivity : AppCompatActivity() {
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
         soundManager = SoundManager(this)
+        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         soundMode()
         choiceThemeGameButton()
     }
 
     private fun choiceThemeGameButton() {
         var animation = AnimationUtils.loadAnimation(this, R.anim.scale_btn)
-        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
+
 
         binding.btnLuckyTheme.setOnClickListener {
             it.startAnimation(animation)
@@ -90,10 +91,6 @@ class MenuActivity : AppCompatActivity() {
             soundManager.apply {
                 loadSound("backgroundMenu", R.raw.sound_background_menu)
                 playSound("backgroundMenu", true)
-            }
-        } else {
-            soundManager.apply {
-                stopSound("backgroundMenu")
             }
         }
     }

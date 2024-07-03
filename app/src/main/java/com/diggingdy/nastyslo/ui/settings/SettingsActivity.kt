@@ -30,7 +30,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
         soundManager = SoundManager(this)
-
+        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         setSelectedThemeAndLevel()
         setButtonBackgroundSoundAndVibration()
         changeSettingsButton()
@@ -65,7 +65,6 @@ class SettingsActivity : AppCompatActivity() {
     private fun changeSettingsButton() {
         var animation = AnimationUtils.loadAnimation(this, R.anim.scale)
 
-        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         isVibration = sharedPref.getBoolean("vibration_enabled", false)
         isSound = sharedPref.getBoolean("sound_enabled", false)
 
@@ -159,10 +158,6 @@ class SettingsActivity : AppCompatActivity() {
             soundManager.apply {
                 loadSound("backgroundMenu", R.raw.sound_background_menu)
                 playSound("backgroundMenu", true)
-            }
-        } else {
-            soundManager.apply {
-                stopSound("backgroundMenu")
             }
         }
     }

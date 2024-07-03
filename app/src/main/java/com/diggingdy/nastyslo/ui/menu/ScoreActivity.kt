@@ -21,13 +21,14 @@ class ScoreActivity : AppCompatActivity() {
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
         soundManager = SoundManager(this)
+        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         soundMode()
         confirmGameSettingsButton()
     }
 
     private fun confirmGameSettingsButton() {
         var animation = AnimationUtils.loadAnimation(this, R.anim.scale)
-        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
+
         binding.btnOk.setOnClickListener {
             it.startAnimation(animation)
             vibrationMode()
@@ -57,10 +58,6 @@ class ScoreActivity : AppCompatActivity() {
             soundManager.apply {
                 loadSound("backgroundMenu", R.raw.sound_background_menu)
                 playSound("backgroundMenu", true)
-            }
-        } else {
-            soundManager.apply {
-                stopSound("backgroundMenu")
             }
         }
     }

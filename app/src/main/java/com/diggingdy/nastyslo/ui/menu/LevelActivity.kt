@@ -21,13 +21,14 @@ class LevelActivity : AppCompatActivity() {
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
         soundManager = SoundManager(this)
+        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         soundMode()
         choiceLevelGameButton()
     }
 
     private fun choiceLevelGameButton() {
         var animation = AnimationUtils.loadAnimation(this, R.anim.scale_btn)
-        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
+
 
         binding.btnEasyLevel.setOnClickListener {
             it.startAnimation(animation)
@@ -90,10 +91,6 @@ class LevelActivity : AppCompatActivity() {
             soundManager.apply {
                 loadSound("backgroundMenu", R.raw.sound_background_menu)
                 playSound("backgroundMenu", true)
-            }
-        } else {
-            soundManager.apply {
-                stopSound("backgroundMenu")
             }
         }
     }

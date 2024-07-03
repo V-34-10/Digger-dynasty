@@ -22,13 +22,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
         soundManager = SoundManager(this)
+        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         soundMode()
         startPrivacy()
     }
 
     private fun startPrivacy() {
         val animation = AnimationUtils.loadAnimation(this, R.anim.scale)
-        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         val flagPrivacy = sharedPref.getBoolean("statusPrivacy", false)
 
         if (!flagPrivacy) {
@@ -69,10 +69,6 @@ class MainActivity : AppCompatActivity() {
             soundManager.apply {
                 loadSound("backgroundMenu", R.raw.sound_background_menu)
                 playSound("backgroundMenu", true)
-            }
-        } else {
-            soundManager.apply {
-                stopSound("backgroundMenu")
             }
         }
     }
