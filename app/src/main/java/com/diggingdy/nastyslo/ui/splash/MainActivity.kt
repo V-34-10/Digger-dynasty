@@ -67,8 +67,7 @@ class MainActivity : AppCompatActivity() {
         val isSound = sharedPref.getBoolean("sound_enabled", false)
         if (isSound) {
             soundManager.apply {
-                loadSound("backgroundMenu", R.raw.sound_background_menu)
-                playSound("backgroundMenu", true)
+                playSound(R.raw.sound_background_menu, true)
             }
         }
     }
