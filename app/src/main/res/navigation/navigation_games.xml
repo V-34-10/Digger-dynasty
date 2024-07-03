@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/title_matchmaking_lucky_game"
-        android:name="com.diggingdy.nastyslo.ui.scene.games.easy.MatchmakingEasyGameFragment"
+        android:name="com.diggingdy.nastyslo.ui.scene.games.MatchmakingEasyGameFragment"
         android:label="@string/title_matchmaking_lucky_game"
         tools:layout="@layout/fragment_matchmaking_easy_game" />
 
     <fragment
         android:id="@+id/title_matchmaking_jack_game"
-        android:name="com.diggingdy.nastyslo.ui.scene.games.medium.MatchmakingMediumGameFragment"
+        android:name="com.diggingdy.nastyslo.ui.scene.games.MatchmakingMediumGameFragment"
         android:label="@string/title_matchmaking_jack_game"
         tools:layout="@layout/fragment_matchmaking_medium_game" />
 
     <fragment
         android:id="@+id/matchmaking_maria_game"
-        android:name="com.diggingdy.nastyslo.ui.scene.games.hard.MatchmakingHardGameFragment"
+        android:name="com.diggingdy.nastyslo.ui.scene.games.MatchmakingHardGameFragment"
         android:label="@string/title_matchmaking_maria_game"
         tools:layout="@layout/fragment_matchmaking_hard_game" />
 

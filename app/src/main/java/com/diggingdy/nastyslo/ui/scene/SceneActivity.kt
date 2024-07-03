@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import com.diggingdy.nastyslo.HideNavigation
 import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.ActivitySceneBinding
-import com.diggingdy.nastyslo.ui.scene.games.easy.MatchmakingEasyGameFragment
-import com.diggingdy.nastyslo.ui.scene.games.hard.MatchmakingHardGameFragment
-import com.diggingdy.nastyslo.ui.scene.games.medium.MatchmakingMediumGameFragment
+import com.diggingdy.nastyslo.ui.scene.games.MatchmakingEasyGameFragment
+import com.diggingdy.nastyslo.ui.scene.games.MatchmakingHardGameFragment
+import com.diggingdy.nastyslo.ui.scene.games.MatchmakingMediumGameFragment
 import com.diggingdy.nastyslo.ui.settings.SettingsActivity
 
 class SceneActivity : AppCompatActivity() {

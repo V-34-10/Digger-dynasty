@@ -1,4 +1,4 @@
-package com.diggingdy.nastyslo.ui.scene.games.hard
+package com.diggingdy.nastyslo.ui.scene.games
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
