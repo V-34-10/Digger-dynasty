@@ -57,7 +57,7 @@
         android:layout_marginBottom="25dp"
         android:background="@drawable/background_scene_game_second"
         android:orientation="vertical"
-        android:padding="@dimen/dp30"
+        android:padding="@dimen/dp10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/control_bar_game"
         app:layout_constraintStart_toEndOf="@+id/status_wins"
