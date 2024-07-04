@@ -85,7 +85,8 @@ class MatchmakingEasyGameFragment : Fragment() {
 
     private fun initRecyclerSceneGame() {
         val spanCount = getSpanCountForLevel()
-        adapter = CardAdapter(cardList, spanCount)
+        val level = sharedPref.getString("levelGame", "Easy") ?: "Easy"
+        adapter = CardAdapter(cardList, level)
         recyclerView = binding.sceneGame
 
         recyclerView.layoutManager = GridLayoutManager(context, spanCount)
@@ -118,7 +119,7 @@ class MatchmakingEasyGameFragment : Fragment() {
         }
 
         imageList.clear()
-        imageList.addAll(getImagesForLevel(level)) // Оновлення imageList
+        imageList.addAll(getImagesForLevel(level))
 
         cardList.clear()
         for (i in 0 until numPairs) {
@@ -127,7 +128,6 @@ class MatchmakingEasyGameFragment : Fragment() {
             cardList.add(Card(imageResId))
         }
 
-        // Додаємо одну непарну картку тільки для easy
         if (level == "Easy") {
             cardList.add(Card(imageList[0]))
         }
@@ -137,72 +137,19 @@ class MatchmakingEasyGameFragment : Fragment() {
     }
 
     private fun getImagesForLevel(level: String): List<Int> {
+        val baseImages = listOf(
+            R.drawable.key_lucky_a,
+            R.drawable.key_lucky_b,
+            R.drawable.key_lucky_c,
+            R.drawable.key_lucky_d,
+            R.drawable.key_lucky_e
+        )
+
         return when (level) {
-            "Easy" -> listOf(
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_d,
-                R.drawable.key_lucky_e,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_d
-            )
-
-            "Medium" -> listOf(
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_d,
-                R.drawable.key_lucky_e,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_d,
-                R.drawable.key_lucky_e,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c
-            )
-
-            "Hard" -> listOf(
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_d,
-                R.drawable.key_lucky_e,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_d,
-                R.drawable.key_lucky_e,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b
-            )
-
-            else -> listOf(
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_d,
-                R.drawable.key_lucky_e,
-                R.drawable.key_lucky_a,
-                R.drawable.key_lucky_b,
-                R.drawable.key_lucky_c,
-                R.drawable.key_lucky_d
-            )
+            "Easy" -> baseImages + baseImages.take(4) // 9 карток для Easy
+            "Medium" -> baseImages + baseImages + baseImages.take(3) // 16 карток для Medium
+            "Hard" -> baseImages + baseImages + baseImages + baseImages.take(2) // 20 карток для Hard
+            else -> baseImages + baseImages.take(4) // 9 карток за замовчуванням
         }
     }
 
