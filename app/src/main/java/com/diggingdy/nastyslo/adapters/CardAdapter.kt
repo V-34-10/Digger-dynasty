@@ -1,5 +1,6 @@
 package com.diggingdy.nastyslo.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.model.Card
 
-class CardAdapter(private val cardList: List<Card>, private val spanCount: Int) :
+class CardAdapter(private val cardList: List<Card>, private val level: String) :
     RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
     var onCardClick: ((Card, Int) -> Unit)? = null
@@ -20,12 +21,16 @@ class CardAdapter(private val cardList: List<Card>, private val spanCount: Int) 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemView = layoutInflater.inflate(R.layout.card_image, parent, false)
+        val cardImage: ImageView = itemView.findViewById(R.id.cardImage)
 
-        val displayMetrics = parent.context.resources.displayMetrics
-        val screenWidth = displayMetrics.widthPixels
-        val cardWidth = screenWidth / spanCount
+        val cardSize = if (level == "Medium" || level == "Hard") {
+            80.dpToPx(parent.context) // 80dp для Medium та Hard
+        } else {
+            100.dpToPx(parent.context) // 60dp для Easy
+        }
+        cardImage.layoutParams.width = cardSize
+        cardImage.layoutParams.height = cardSize
 
-        itemView.layoutParams = ViewGroup.LayoutParams(cardWidth, cardWidth)
         return CardViewHolder(itemView)
     }
 
@@ -44,5 +49,10 @@ class CardAdapter(private val cardList: List<Card>, private val spanCount: Int) 
 
     override fun getItemCount(): Int {
         return cardList.size
+    }
+
+    private fun Int.dpToPx(context: Context): Int {
+        val density = context.resources.displayMetrics.density
+        return (this * density).toInt()
     }
 }
