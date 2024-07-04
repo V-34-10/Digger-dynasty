@@ -27,7 +27,7 @@ object ControllerGame {
     private val imageList = mutableListOf<Int>()
     private var selectedLevel: String = ""
     private var selectedTheme: String = ""
-
+    private var stepsCount = 0
     fun initRecyclerSceneGame(binding: ViewBinding, context: Context) {
         sharedPref =
             context.getSharedPreferences("diggingDynastyPref", AppCompatActivity.MODE_PRIVATE)
@@ -56,7 +56,7 @@ object ControllerGame {
         addCardItems()
 
         adapter.onCardClick = { cardItem, position ->
-            handleCardClick(cardItem, position)
+            handleCardClick(cardItem, position, binding)
         }
     }
 
@@ -147,7 +147,7 @@ object ControllerGame {
         }
     }
 
-    private fun handleCardClick(cardItem: Card, position: Int) {
+    private fun handleCardClick(cardItem: Card, position: Int, binding: ViewBinding) {
         if (isFlipping || cardItem.isFlipped || cardItem.isMatched) return
 
         cardItem.isFlipped = true
@@ -163,6 +163,8 @@ object ControllerGame {
             Handler(Looper.getMainLooper()).postDelayed({
                 checkMatch()
             }, 1000)
+
+            setStepsAttemptsCard(binding)
         }
     }
 
@@ -177,7 +179,7 @@ object ControllerGame {
             firstCard?.isFlipped = false
             secondCard?.isFlipped = false
         }
-
+        stepsCount++
         adapter.notifyItemChanged(firstPos)
         adapter.notifyItemChanged(secondPos)
         firstCard = null
@@ -186,7 +188,7 @@ object ControllerGame {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun resetGame() {
+    fun resetGame(binding: ViewBinding) {
         firstCard = null
         secondCard = null
         isFlipping = false
@@ -199,5 +201,23 @@ object ControllerGame {
         }
 
         adapter.notifyDataSetChanged()
+        stepsCount = 0
+        setStepsAttemptsCard(binding)
+    }
+
+    private fun setStepsAttemptsCard(binding: ViewBinding) {
+        when (binding) {
+            is FragmentMatchmakingEasyGameBinding -> {
+                binding.textSteps.text = stepsCount.toString()
+            }
+
+            is FragmentMatchmakingMediumGameBinding -> {
+                binding.textSteps.text = stepsCount.toString()
+            }
+
+            is FragmentMatchmakingHardGameBinding -> {
+                binding.textSteps.text = stepsCount.toString()
+            }
+        }
     }
 }
