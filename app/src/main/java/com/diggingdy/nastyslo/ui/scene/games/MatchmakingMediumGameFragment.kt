@@ -53,7 +53,7 @@ class MatchmakingMediumGameFragment : Fragment() {
         var animation = AnimationUtils.loadAnimation(context, R.anim.scale)
         binding.btnStart.setOnClickListener {
             it.startAnimation(animation)
-            ControllerGame.resetGame()
+            ControllerGame.resetGame(binding)
         }
         binding.btnChange.setOnClickListener {
             animation = AnimationUtils.loadAnimation(context, R.anim.scale)
@@ -69,6 +69,7 @@ class MatchmakingMediumGameFragment : Fragment() {
         }
         binding.btnBack.setOnClickListener {
             animation = AnimationUtils.loadAnimation(context, R.anim.scale)
+            binding.textSteps.text = getString(R.string.text_result_wins)
             it.startAnimation(animation)
             activity?.onBackPressed()
         }
