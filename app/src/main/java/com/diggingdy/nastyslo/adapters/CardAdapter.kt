@@ -8,8 +8,13 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.model.Card
+import com.diggingdy.nastyslo.ui.scene.games.ControllerGame
 
-class CardAdapter(private val cardList: List<Card>, private val level: String) :
+class CardAdapter(
+    private val cardList: List<Card>,
+    private val level: String,
+    private val theme: String
+) :
     RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
     var onCardClick: ((Card, Int) -> Unit)? = null
@@ -39,7 +44,19 @@ class CardAdapter(private val cardList: List<Card>, private val level: String) :
         if (cardItem.isFlipped) {
             holder.cardImage.setImageResource(cardItem.imageResId)
         } else {
-            holder.cardImage.setImageResource(R.drawable.key_lucky_f)
+            when (theme) {
+                "Lucky Lucy" -> {
+                    holder.cardImage.setImageResource(R.drawable.key_lucky_f)
+                }
+
+                "Old-Timer Jack" -> {
+                    holder.cardImage.setImageResource(R.drawable.key_old_jack_f)
+                }
+
+                "Mystic Maria" -> {
+                    holder.cardImage.setImageResource(R.drawable.key_maria_e)
+                }
+            }
         }
 
         holder.itemView.setOnClickListener {
