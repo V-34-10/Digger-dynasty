@@ -20,6 +20,7 @@ import com.diggingdy.nastyslo.databinding.FragmentMatchmakingEasyGameBinding
 import com.diggingdy.nastyslo.model.Card
 import com.diggingdy.nastyslo.ui.menu.LevelActivity
 import com.diggingdy.nastyslo.ui.menu.ScoreActivity
+import com.diggingdy.nastyslo.ui.settings.SoundManager
 
 class MatchmakingEasyGameFragment : Fragment() {
     private lateinit var binding: FragmentMatchmakingEasyGameBinding
@@ -32,12 +33,14 @@ class MatchmakingEasyGameFragment : Fragment() {
     private var isFlipping = false
     private val imageList = mutableListOf<Int>()
     private var selectedLevel: String = ""
+    private lateinit var soundManager: SoundManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMatchmakingEasyGameBinding.inflate(layoutInflater, container, false)
 
+        soundManager = context?.let { SoundManager(it) }!!
         sharedPref =
             requireActivity().getSharedPreferences(
                 "diggingDynastyPref",
@@ -49,6 +52,7 @@ class MatchmakingEasyGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        soundMode()
         setSelectedLevel()
         initRecyclerSceneGame()
         controlGameButton()
@@ -205,5 +209,19 @@ class MatchmakingEasyGameFragment : Fragment() {
         }
 
         adapter.notifyDataSetChanged()
+    }
+
+    private fun soundMode() {
+        val isSound = sharedPref.getBoolean("sound_enabled", false)
+        if (isSound) {
+            soundManager.apply {
+                playSound(R.raw.sound_lucky_lucy, true)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundManager.release()
     }
 }
