@@ -31,6 +31,7 @@ class MatchmakingEasyGameFragment : Fragment() {
     private var secondCard: Card? = null
     private var isFlipping = false
     private val imageList = mutableListOf<Int>()
+    private var selectedLevel: String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,8 +55,8 @@ class MatchmakingEasyGameFragment : Fragment() {
     }
 
     private fun setSelectedLevel() {
-        val setLevel = sharedPref.getString("levelGame", "")
-        binding.textSelectedLevel.text = setLevel
+        selectedLevel = sharedPref.getString("levelGame", "").toString()
+        binding.textSelectedLevel.text = selectedLevel
     }
 
     private fun controlGameButton() {
@@ -85,8 +86,7 @@ class MatchmakingEasyGameFragment : Fragment() {
 
     private fun initRecyclerSceneGame() {
         val spanCount = getSpanCountForLevel()
-        val level = sharedPref.getString("levelGame", "Easy") ?: "Easy"
-        adapter = CardAdapter(cardList, level)
+        adapter = CardAdapter(cardList, selectedLevel)
         recyclerView = binding.sceneGame
 
         recyclerView.layoutManager = GridLayoutManager(context, spanCount)
@@ -100,7 +100,7 @@ class MatchmakingEasyGameFragment : Fragment() {
     }
 
     private fun getSpanCountForLevel(): Int {
-        return when (sharedPref.getString("levelGame", "Easy") ?: "Easy") {
+        return when (selectedLevel) {
             "Easy" -> 3
             "Medium" -> 4
             "Hard" -> 5
@@ -110,8 +110,7 @@ class MatchmakingEasyGameFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun addCardItems() {
-        val level = sharedPref.getString("levelGame", "Easy") ?: "Easy"
-        val numPairs = when (level) {
+        val numPairs = when (selectedLevel) {
             "Easy" -> 4 // 4 пари для easy (8 карток)
             "Medium" -> 8 // 8 пар для medium (16 карток)
             "Hard" -> 10 // 10 пар для hard (20 карток)
@@ -119,17 +118,18 @@ class MatchmakingEasyGameFragment : Fragment() {
         }
 
         imageList.clear()
-        imageList.addAll(getImagesForLevel(level))
+        imageList.addAll(getImagesForLevel(selectedLevel))
 
         cardList.clear()
+        var position = 0
         for (i in 0 until numPairs) {
             val imageResId = imageList[i]
-            cardList.add(Card(imageResId))
-            cardList.add(Card(imageResId))
+            cardList.add(Card(imageResId, position = position++))
+            cardList.add(Card(imageResId, position = position++))
         }
 
-        if (level == "Easy") {
-            cardList.add(Card(imageList[0]))
+        if (selectedLevel == "Easy") {
+            cardList.add(Card(imageList[0], position = position++))
         }
 
         cardList.shuffle()
@@ -157,6 +157,7 @@ class MatchmakingEasyGameFragment : Fragment() {
         if (isFlipping || cardItem.isFlipped || cardItem.isMatched) return
 
         cardItem.isFlipped = true
+        cardItem.position = position
         adapter.notifyItemChanged(position)
 
         if (firstCard == null) {
@@ -172,25 +173,19 @@ class MatchmakingEasyGameFragment : Fragment() {
     }
 
     private fun checkMatch() {
+        val firstPos = firstCard?.position ?: -1
+        val secondPos = secondCard?.position ?: -1
+
         if (firstCard?.imageResId == secondCard?.imageResId) {
             firstCard?.isMatched = true
             secondCard?.isMatched = true
-
-            val firstPos = cardList.indexOf(firstCard)
-            val secondPos = cardList.indexOf(secondCard)
-            adapter.notifyItemChanged(firstPos)
-            adapter.notifyItemChanged(secondPos)
-
         } else {
             firstCard?.isFlipped = false
             secondCard?.isFlipped = false
-
-            val firstPos = cardList.indexOf(firstCard)
-            val secondPos = cardList.indexOf(secondCard)
-            adapter.notifyItemChanged(firstPos)
-            adapter.notifyItemChanged(secondPos)
         }
 
+        adapter.notifyItemChanged(firstPos)
+        adapter.notifyItemChanged(secondPos)
         firstCard = null
         secondCard = null
         isFlipping = false
