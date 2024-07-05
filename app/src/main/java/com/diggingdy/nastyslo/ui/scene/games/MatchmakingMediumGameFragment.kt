@@ -57,19 +57,21 @@ class MatchmakingMediumGameFragment : Fragment() {
         }
         binding.btnChange.setOnClickListener {
             animation = AnimationUtils.loadAnimation(context, R.anim.scale)
+            ControllerGame.resetGame(binding)
             it.startAnimation(animation)
             startActivity(Intent(context, LevelActivity::class.java))
             activity?.finish()
         }
         binding.btnHighScore.setOnClickListener {
             animation = AnimationUtils.loadAnimation(context, R.anim.scale)
+            ControllerGame.resetGame(binding)
             it.startAnimation(animation)
             startActivity(Intent(context, ScoreActivity::class.java))
             activity?.finish()
         }
         binding.btnBack.setOnClickListener {
             animation = AnimationUtils.loadAnimation(context, R.anim.scale)
-            binding.textSteps.text = getString(R.string.text_result_wins)
+            ControllerGame.resetGame(binding)
             it.startAnimation(animation)
             activity?.onBackPressed()
         }
