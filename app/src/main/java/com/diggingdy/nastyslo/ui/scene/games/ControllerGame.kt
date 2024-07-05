@@ -15,6 +15,7 @@ import com.diggingdy.nastyslo.model.Card
 import com.diggingdy.nastyslo.databinding.FragmentMatchmakingEasyGameBinding
 import com.diggingdy.nastyslo.databinding.FragmentMatchmakingHardGameBinding
 import com.diggingdy.nastyslo.databinding.FragmentMatchmakingMediumGameBinding
+import com.diggingdy.nastyslo.model.LevelStats
 
 object ControllerGame {
     private lateinit var sharedPref: SharedPreferences
@@ -28,6 +29,11 @@ object ControllerGame {
     private var selectedLevel: String = ""
     private var selectedTheme: String = ""
     private var stepsCount = 0
+    val stats = mutableMapOf(
+        "Easy" to LevelStats(),
+        "Medium" to LevelStats(),
+        "Hard" to LevelStats()
+    )
     fun initRecyclerSceneGame(binding: ViewBinding, context: Context) {
         sharedPref =
             context.getSharedPreferences("diggingDynastyPref", AppCompatActivity.MODE_PRIVATE)
@@ -184,6 +190,10 @@ object ControllerGame {
         firstCard = null
         secondCard = null
         isFlipping = false
+
+        if (isGameOver()) {
+            recordGameStats()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -217,6 +227,47 @@ object ControllerGame {
             is FragmentMatchmakingHardGameBinding -> {
                 binding.textSteps.text = stepsCount.toString()
             }
+        }
+    }
+
+    private fun recordGameStats() {
+        val levelStats = stats[selectedLevel]!!
+
+        levelStats.gamesPlayed++
+        if (stepsCount <= 20) {
+            levelStats.wins++
+        } else {
+            levelStats.losses++
+        }
+
+        saveStats()
+
+        stepsCount = 0
+    }
+
+    private fun isGameOver(): Boolean {
+        return if (selectedLevel == "Easy") {
+            cardList.count { it.isMatched } == cardList.size - 1
+        } else {
+            cardList.all { it.isMatched }
+        }
+    }
+
+    private fun saveStats() {
+        val editor = sharedPref.edit()
+        for ((level, stats) in stats) {
+            editor.putInt("${level}_gamesPlayed", stats.gamesPlayed)
+            editor.putInt("${level}_wins", stats.wins)
+            editor.putInt("${level}_losses", stats.losses)
+        }
+        editor.apply()
+    }
+
+    fun loadStats(sharedPref: SharedPreferences) {
+        for ((level, stats) in stats) {
+            stats.gamesPlayed = sharedPref.getInt("${level}_gamesPlayed", 0)
+            stats.wins = sharedPref.getInt("${level}_wins", 0)
+            stats.losses = sharedPref.getInt("${level}_losses", 0)
         }
     }
 }
