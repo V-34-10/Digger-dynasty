@@ -13,6 +13,7 @@ import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.FragmentMatchmakingMediumGameBinding
 import com.diggingdy.nastyslo.ui.menu.LevelActivity
 import com.diggingdy.nastyslo.ui.menu.ScoreActivity
+import com.diggingdy.nastyslo.ui.settings.SettingsActivity
 import com.diggingdy.nastyslo.ui.settings.SoundManager
 
 class MatchmakingMediumGameFragment : Fragment() {
@@ -59,14 +60,14 @@ class MatchmakingMediumGameFragment : Fragment() {
             animation = AnimationUtils.loadAnimation(context, R.anim.scale)
             ControllerGame.resetGame(binding)
             it.startAnimation(animation)
-            startActivity(Intent(context, LevelActivity::class.java))
+            startActivity(Intent(context, SettingsActivity::class.java))
             activity?.finish()
         }
         binding.btnHighScore.setOnClickListener {
             animation = AnimationUtils.loadAnimation(context, R.anim.scale)
             ControllerGame.resetGame(binding)
             it.startAnimation(animation)
-            startActivity(Intent(context, ScoreActivity::class.java))
+            startActivity(Intent(context, SettingsActivity::class.java))
             activity?.finish()
         }
         binding.btnBack.setOnClickListener {
