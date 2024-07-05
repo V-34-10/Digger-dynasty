@@ -162,9 +162,8 @@ object ControllerGame {
 
             Handler(Looper.getMainLooper()).postDelayed({
                 checkMatch()
+                setStepsAttemptsCard(binding)
             }, 1000)
-
-            setStepsAttemptsCard(binding)
         }
     }
 
