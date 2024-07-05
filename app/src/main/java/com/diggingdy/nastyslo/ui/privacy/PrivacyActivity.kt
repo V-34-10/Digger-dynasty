@@ -20,6 +20,7 @@ class PrivacyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
+        sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         acceptPrivacyButton()
     }
 
