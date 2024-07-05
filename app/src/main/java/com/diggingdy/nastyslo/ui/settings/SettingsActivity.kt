@@ -20,7 +20,7 @@ import com.diggingdy.nastyslo.ui.settings.VibrateManager.vibrateDevice
 class SettingsActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySettingsBinding.inflate(layoutInflater) }
     private val managerAudio by lazy { getSystemService(Context.AUDIO_SERVICE) as AudioManager }
-    private var defaultVolume: Int = 0
+    private var defaultVolume: Int = 50
     private var isVibration: Boolean = false
     private var isSound: Boolean = false
     private lateinit var sharedPref: SharedPreferences
