@@ -16,6 +16,7 @@ import com.diggingdy.nastyslo.ui.menu.ScoreActivity
 import com.diggingdy.nastyslo.ui.scene.SceneActivity
 import com.diggingdy.nastyslo.ui.settings.VibrateManager.cancelVibration
 import com.diggingdy.nastyslo.ui.settings.VibrateManager.vibrateDevice
+import com.diggingdy.nastyslo.ui.splash.MainActivity
 
 class SettingsActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySettingsBinding.inflate(layoutInflater) }
@@ -130,7 +131,7 @@ class SettingsActivity : AppCompatActivity() {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             vibrationMode()
             it.startAnimation(animation)
-            startActivity(Intent(this@SettingsActivity, ScoreActivity::class.java))
+            startActivity(Intent(this@SettingsActivity, MainActivity::class.java))
             finish()
         }
     }
