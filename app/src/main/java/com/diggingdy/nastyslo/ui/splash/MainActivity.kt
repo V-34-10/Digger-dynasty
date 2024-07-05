@@ -37,18 +37,14 @@ class MainActivity : AppCompatActivity() {
         val animation = AnimationUtils.loadAnimation(this, R.anim.scale)
         val flagPrivacy = sharedPref.getBoolean("statusPrivacy", false)
 
-        if (!flagPrivacy) {
-            sharedPref.edit().putBoolean("statusPrivacy", true).apply()
-        }
-
         binding.btnPlay.setOnClickListener {
             it.startAnimation(animation)
             vibrationMode()
             binding.btnPlay.isEnabled = false
-            val startIntent = if (!flagPrivacy) {
-                Intent(this@MainActivity, PrivacyActivity::class.java)
-            } else {
+            val startIntent = if (flagPrivacy) {
                 Intent(this@MainActivity, MenuActivity::class.java)
+            } else {
+                Intent(this@MainActivity, PrivacyActivity::class.java)
             }
 
             startActivity(startIntent)
