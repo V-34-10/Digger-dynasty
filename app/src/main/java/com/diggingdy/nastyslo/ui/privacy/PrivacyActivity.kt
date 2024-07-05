@@ -29,6 +29,7 @@ class PrivacyActivity : AppCompatActivity() {
         binding.btnAccept.setOnClickListener {
             it.startAnimation(animation)
             vibrationMode()
+            sharedPref.edit().putBoolean("statusPrivacy", true).apply()
             startActivity(Intent(this@PrivacyActivity, MenuActivity::class.java))
             finish()
         }
