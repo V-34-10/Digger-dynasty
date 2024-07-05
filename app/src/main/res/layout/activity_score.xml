@@ -38,28 +38,232 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_score">
 
-            <ImageView
-                android:id="@+id/about_easy_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/about_easy_level"
-                android:contentDescription="@string/level_easy" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/score_easy_level"
+                android:layout_width="170dp"
+                android:layout_height="180dp"
+                android:background="@drawable/background_score"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/btn_high_score"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/about_medium_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:background="@drawable/about_medium_level"
-                android:contentDescription="@string/level_medium" />
+                <TextView
+                    android:id="@+id/text_selected_level_easy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/arvo_bold"
+                    android:text="@string/text_selected_level"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp25"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/about_hard_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/text_win_rate_easy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/background_text_win_rate"
+                    android:fontFamily="@font/arvo_bold"
+                    android:paddingTop="5dp"
+                    android:text="@string/text_set_win_rate"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_selected_level_easy" />
+
+                <TextView
+                    android:id="@+id/text_wins_easy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/background_text_win_lose"
+                    android:fontFamily="@font/arvo_bold"
+                    android:paddingTop="5dp"
+                    android:text="@string/text_set_wins"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_win_rate_easy" />
+
+                <TextView
+                    android:id="@+id/text_loses_easy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/background_text_win_lose"
+                    android:fontFamily="@font/arvo_bold"
+                    android:paddingTop="5dp"
+                    android:text="@string/text_set_loses"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_wins_easy" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/score_medium_level"
+                android:layout_width="170dp"
+                android:layout_height="180dp"
                 android:layout_marginStart="25dp"
-                android:background="@drawable/about_hard_level"
-                android:contentDescription="@string/level_hard" />
+                android:background="@drawable/background_score"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/btn_high_score"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/text_selected_level_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/arvo_bold"
+                    android:text="@string/text_selected_level_medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp25"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_win_rate_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/background_text_win_rate"
+                    android:fontFamily="@font/arvo_bold"
+                    android:paddingTop="5dp"
+                    android:text="@string/text_set_win_rate"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_selected_level_medium" />
+
+                <TextView
+                    android:id="@+id/text_wins_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/background_text_win_lose"
+                    android:fontFamily="@font/arvo_bold"
+                    android:paddingTop="5dp"
+                    android:text="@string/text_set_wins"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_win_rate_medium" />
+
+                <TextView
+                    android:id="@+id/text_loses_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/background_text_win_lose"
+                    android:fontFamily="@font/arvo_bold"
+                    android:paddingTop="5dp"
+                    android:text="@string/text_set_loses"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_wins_medium" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/score_hard_level"
+                android:layout_width="170dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="25dp"
+                android:background="@drawable/background_score"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/btn_high_score"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/text_selected_level_hard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/arvo_bold"
+                    android:text="@string/text_selected_level_hard"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp25"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_win_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/background_text_win_rate"
+                    android:fontFamily="@font/arvo_bold"
+                    android:paddingTop="5dp"
+                    android:text="@string/text_set_win_rate"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_selected_level_hard" />
+
+                <TextView
+                    android:id="@+id/text_wins_hard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/background_text_win_lose"
+                    android:fontFamily="@font/arvo_bold"
+                    android:paddingTop="5dp"
+                    android:text="@string/text_set_wins"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_win_rate" />
+
+                <TextView
+                    android:id="@+id/text_loses_hard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/background_text_win_lose"
+                    android:fontFamily="@font/arvo_bold"
+                    android:paddingTop="5dp"
+                    android:text="@string/text_set_loses"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_wins_hard" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 

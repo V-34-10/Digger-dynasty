@@ -48,4 +48,9 @@
     <string name="name_old_jack">Old-Timer Jack</string>
     <string name="name_maria">Mystic Maria</string>
     <string name="card_image">card image</string>
+    <string name="text_set_loses">Loses</string>
+    <string name="text_set_wins">Wins</string>
+    <string name="text_set_win_rate">Win rate</string>
+    <string name="text_selected_level_medium">Medium</string>
+    <string name="text_selected_level_hard">Hard</string>
 </resources>
