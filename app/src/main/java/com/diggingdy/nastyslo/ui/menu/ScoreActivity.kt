@@ -1,5 +1,6 @@
 package com.diggingdy.nastyslo.ui.menu
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -8,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.diggingdy.nastyslo.HideNavigation
 import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.ActivityScoreBinding
+import com.diggingdy.nastyslo.model.LevelStats
+import com.diggingdy.nastyslo.ui.scene.games.ControllerGame
+import com.diggingdy.nastyslo.ui.scene.games.ControllerGame.loadStats
 import com.diggingdy.nastyslo.ui.settings.SettingsActivity
 import com.diggingdy.nastyslo.ui.settings.SoundManager
 import com.diggingdy.nastyslo.ui.settings.VibrateManager
@@ -23,7 +27,48 @@ class ScoreActivity : AppCompatActivity() {
         soundManager = SoundManager(this)
         sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         soundMode()
+        setHighScore()
         confirmGameSettingsButton()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setHighScore() {
+        loadStats(sharedPref)
+
+        val easyStatsEasy = ControllerGame.stats["Easy"]!!
+
+        binding.textWinRateEasy.text =
+            getString(R.string.text_set_win_rate) + " %02d%%".format(calculateWinRate(easyStatsEasy).toInt())
+        binding.textWinsEasy.text =
+            getString(R.string.text_set_wins) + " " + easyStatsEasy.wins.toString()
+        binding.textLosesEasy.text =
+            getString(R.string.text_set_loses) + " " + easyStatsEasy.losses.toString()
+
+        val easyStatsMedium = ControllerGame.stats["Medium"]!!
+
+        binding.textWinRateMedium.text =
+            getString(R.string.text_set_win_rate) + " %02d%%".format(calculateWinRate(easyStatsMedium).toInt())
+        binding.textWinsMedium.text =
+            getString(R.string.text_set_wins) + " " + easyStatsMedium.wins.toString()
+        binding.textLosesMedium.text =
+            getString(R.string.text_set_loses) + " " + easyStatsMedium.losses.toString()
+
+        val easyStatsHard = ControllerGame.stats["Hard"]!!
+
+        binding.textWinRateHard.text =
+            getString(R.string.text_set_win_rate) + " %02d%%".format(calculateWinRate(easyStatsHard).toInt())
+        binding.textWinsHard.text =
+            getString(R.string.text_set_wins) + " " + easyStatsHard.wins.toString()
+        binding.textLosesHard.text =
+            getString(R.string.text_set_loses) + " " + easyStatsHard.losses.toString()
+    }
+
+    private fun calculateWinRate(levelStats: LevelStats): Float {
+        return if (levelStats.gamesPlayed > 0) {
+            (levelStats.wins.toFloat() / levelStats.gamesPlayed) * 100
+        } else {
+            0f
+        }
     }
 
     private fun confirmGameSettingsButton() {
