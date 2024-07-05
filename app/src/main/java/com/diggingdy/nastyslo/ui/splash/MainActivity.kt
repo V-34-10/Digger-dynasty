@@ -23,8 +23,14 @@ class MainActivity : AppCompatActivity() {
         HideNavigation.hideNavigation(this)
         soundManager = SoundManager(this)
         sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
+        resetLevelAndThemeGame()
         soundMode()
         startPrivacy()
+    }
+
+    private fun resetLevelAndThemeGame() {
+        sharedPref.edit().putString("themeGame", "").apply()
+        sharedPref.edit().putString("levelGame", "").apply()
     }
 
     private fun startPrivacy() {
