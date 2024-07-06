@@ -19,12 +19,12 @@ import com.diggingdy.nastyslo.ui.settings.VibrateManager
 class ScoreActivity : AppCompatActivity() {
     private val binding by lazy { ActivityScoreBinding.inflate(layoutInflater) }
     private lateinit var sharedPref: SharedPreferences
-    private lateinit var soundManager: SoundManager
+    private lateinit var sound: SoundManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
-        soundManager = SoundManager(this)
+        sound = SoundManager(this)
         sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         soundMode()
         setHighScore()
@@ -47,7 +47,11 @@ class ScoreActivity : AppCompatActivity() {
         val easyStatsMedium = ControllerGame.stats["Medium"]!!
 
         binding.textWinRateMedium.text =
-            getString(R.string.text_set_win_rate) + " %02d%%".format(calculateWinRate(easyStatsMedium).toInt())
+            getString(R.string.text_set_win_rate) + " %02d%%".format(
+                calculateWinRate(
+                    easyStatsMedium
+                ).toInt()
+            )
         binding.textWinsMedium.text =
             getString(R.string.text_set_wins) + " " + easyStatsMedium.wins.toString()
         binding.textLosesMedium.text =
@@ -85,9 +89,19 @@ class ScoreActivity : AppCompatActivity() {
             it.startAnimation(animation)
             vibrationMode()
             sharedPref.edit().putString("levelGame", "").apply()
-            startActivity(Intent(this@ScoreActivity, LevelActivity::class.java))
+            this.onBackPressed()
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sound.resume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sound.pause()
     }
 
     private fun vibrationMode() {
@@ -100,7 +114,7 @@ class ScoreActivity : AppCompatActivity() {
     private fun soundMode() {
         val isSound = sharedPref.getBoolean("sound_enabled", false)
         if (isSound) {
-            soundManager.apply {
+            sound.apply {
                 playSound(R.raw.sound_background_menu, true)
             }
         }
@@ -108,6 +122,6 @@ class ScoreActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        soundManager.release()
+        sound.release()
     }
 }

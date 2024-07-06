@@ -16,12 +16,12 @@ import com.diggingdy.nastyslo.ui.settings.VibrateManager
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var sharedPref: SharedPreferences
-    private lateinit var soundManager: SoundManager
+    private lateinit var sound: SoundManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         HideNavigation.hideNavigation(this)
-        soundManager = SoundManager(this)
+        sound = SoundManager(this)
         sharedPref = getSharedPreferences("diggingDynastyPref", MODE_PRIVATE)
         resetLevelAndThemeGame()
         soundMode()
@@ -31,6 +31,16 @@ class MainActivity : AppCompatActivity() {
     private fun resetLevelAndThemeGame() {
         sharedPref.edit().putString("themeGame", "").apply()
         sharedPref.edit().putString("levelGame", "").apply()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sound.resume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sound.pause()
     }
 
     private fun startPrivacy() {
@@ -68,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     private fun soundMode() {
         val isSound = sharedPref.getBoolean("sound_enabled", false)
         if (isSound) {
-            soundManager.apply {
+            sound.apply {
                 playSound(R.raw.sound_background_menu, true)
             }
         }
@@ -76,6 +86,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        soundManager.release()
+        sound.release()
     }
 }
