@@ -39,6 +39,22 @@ class SoundManager(private val context: Context) {
         }
     }
 
+    fun pause() {
+        mediaPlayers.values.forEach {
+            if (it.isPlaying) {
+                it.pause()
+            }
+        }
+    }
+
+    fun resume() {
+        mediaPlayers.values.forEach {
+            if (!it.isPlaying) {
+                it.start()
+            }
+        }
+    }
+
     fun release() {
         scope.cancel()
         mediaPlayers.values.forEach { it.release() }
