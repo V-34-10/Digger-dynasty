@@ -67,7 +67,7 @@ class MatchmakingEasyGameFragment : Fragment() {
             animation = AnimationUtils.loadAnimation(context, R.anim.scale)
             it.startAnimation(animation)
             ControllerGame.resetGame(binding)
-            startActivity(Intent(context, SettingsActivity::class.java))
+            startActivity(Intent(context, ScoreActivity::class.java))
             activity?.finish()
         }
         binding.btnBack.setOnClickListener {
