@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.FragmentMatchmakingHardGameBinding
-import com.diggingdy.nastyslo.ui.menu.LevelActivity
 import com.diggingdy.nastyslo.ui.menu.ScoreActivity
 import com.diggingdy.nastyslo.ui.settings.SettingsActivity
 import com.diggingdy.nastyslo.ui.settings.SoundManager
@@ -20,14 +19,14 @@ class MatchmakingHardGameFragment : Fragment() {
     private lateinit var binding: FragmentMatchmakingHardGameBinding
     private lateinit var sharedPref: SharedPreferences
     private var selectedLevel: String = ""
-    private lateinit var soundManager: SoundManager
+    private lateinit var sound: SoundManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMatchmakingHardGameBinding.inflate(layoutInflater, container, false)
 
-        soundManager = context?.let { SoundManager(it) }!!
+        sound = context?.let { SoundManager(it) }!!
         sharedPref =
             requireActivity().getSharedPreferences(
                 "diggingDynastyPref",
@@ -78,10 +77,20 @@ class MatchmakingHardGameFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        sound.resume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sound.pause()
+    }
+
     private fun soundMode() {
         val isSound = sharedPref.getBoolean("sound_enabled", false)
         if (isSound) {
-            soundManager.apply {
+            sound.apply {
                 playSound(R.raw.sound_mystic_maria, true)
             }
         }
@@ -89,6 +98,6 @@ class MatchmakingHardGameFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        soundManager.release()
+        sound.release()
     }
 }
