@@ -10,6 +10,7 @@ import com.diggingdy.nastyslo.HideNavigation
 import com.diggingdy.nastyslo.R
 import com.diggingdy.nastyslo.databinding.ActivityScoreBinding
 import com.diggingdy.nastyslo.model.LevelStats
+import com.diggingdy.nastyslo.ui.scene.SceneActivity
 import com.diggingdy.nastyslo.ui.scene.games.ControllerGame
 import com.diggingdy.nastyslo.ui.scene.games.ControllerGame.loadStats
 import com.diggingdy.nastyslo.ui.settings.SettingsActivity
@@ -88,8 +89,7 @@ class ScoreActivity : AppCompatActivity() {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             it.startAnimation(animation)
             vibrationMode()
-            sharedPref.edit().putString("levelGame", "").apply()
-            this.onBackPressed()
+            startActivity(Intent(this@ScoreActivity, SceneActivity::class.java))
             finish()
         }
     }
