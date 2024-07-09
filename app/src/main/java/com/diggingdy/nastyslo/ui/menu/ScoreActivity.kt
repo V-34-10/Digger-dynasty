@@ -82,7 +82,7 @@ class ScoreActivity : AppCompatActivity() {
         binding.btnOk.setOnClickListener {
             it.startAnimation(animation)
             vibrationMode()
-            startActivity(Intent(this@ScoreActivity, SettingsActivity::class.java))
+            startActivity(Intent(this@ScoreActivity, SceneActivity::class.java))
             finish()
         }
         binding.btnBack.setOnClickListener {
