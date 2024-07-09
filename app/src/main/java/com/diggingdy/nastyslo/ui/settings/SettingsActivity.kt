@@ -131,7 +131,7 @@ class SettingsActivity : AppCompatActivity() {
             animation = AnimationUtils.loadAnimation(this, R.anim.scale)
             vibrationMode()
             it.startAnimation(animation)
-            startActivity(Intent(this@SettingsActivity, MainActivity::class.java))
+            startActivity(Intent(this@SettingsActivity, SceneActivity::class.java))
             finish()
         }
     }
